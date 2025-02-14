@@ -19,7 +19,7 @@ def get_huggingface_token():
 @st.cache_resource  # 캐시로 저장
 def initialize_models():
     # 사용할 모델 가져오기 (허깅페이스에서)
-    model_name = "mistralai/Mistral-7B-Instruct-v0.2"
+    model_name = "mistralai/Mistral-7B-Instruct-v0.3"
     token = get_huggingface_token()
 
     llm = HuggingFaceInferenceAPI(  # 기존 HuggingFaceInferenceAPI → HuggingFaceLLM으로 변경
@@ -78,9 +78,9 @@ def main():
     prompt = st.text_input('질문을 입력하세요.')
     if prompt :
         with st.spinner('답변 생성중...'):
-            response = query_engine.get_answers(prompt)
+            response = query_engine.query(prompt)
             st.text('답변: ')
-            st.ifro(response.response)
+            st.info(response.response)
 
     
 if __name__ == '__main__':
